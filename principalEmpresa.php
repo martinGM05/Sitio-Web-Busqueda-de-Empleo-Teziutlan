@@ -109,8 +109,8 @@ if (!isset($_SESSION['NombreUsuario'])) {
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="#schedule-2" role="tab" data-toggle="tab">
-                                                        <i class="material-icons">star</i>
-                                                        Favoritos
+                                                        <i class="material-icons">plagiarism</i>
+                                                        Creados
                                                     </a>
                                                 </li>
                                             </ul>
@@ -120,21 +120,21 @@ if (!isset($_SESSION['NombreUsuario'])) {
                                                 <div class="tab-pane active" id="dashboard-2">
                                                     <div class="row">
                                                         <div class="vacantes">
-                                                            <form>
+                                                            <form action="assets/Databases/insertBanner.php" method="POST" enctype="multipart/form-data">
                                                                 <div class="titleForm">
                                                                     <label id="lblTitle">Ingresa los datos para la vacante</label>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">Título</label>
-                                                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese el título de su vacante">
+                                                                    <input type="text" name="txtTitle" class="form-control" aria-describedby="emailHelp" placeholder="Ingrese el título de su vacante">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="exampleInputPassword1">Descripción</label>
-                                                                    <textarea class="form-control" placeholder="Ingrese la descripción de su vacante" rows="5"></textarea>
+                                                                    <textarea class="form-control" name="txtDescription" placeholder="Ingrese la descripción de su vacante" rows="3"></textarea>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="exampleInputEmail1">Salario</label>
-                                                                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese el salario base">
+                                                                    <input type="number" name="txtSalario" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese el salario base">
                                                                 </div>
                                                                 <button type="submit" class="btn btn-primary">Crear Anuncio</button>
                                                             </form>
@@ -144,7 +144,28 @@ if (!isset($_SESSION['NombreUsuario'])) {
                                                 <div class="tab-pane" id="schedule-2">
                                                     <div class="tab-pane active" id="dashboard-2">
                                                         <div class="row">
-                                                            <div class="col-md-6">
+                                                            <?php
+                                                            $sql = "select b.Title, b.Description, b.Salary from Users as u inner join Enterprise as e on u.idUsers = e.idUsers inner join Banner as b where u.idUsers =".$_SESSION['IdUsuario'];
+                                                            $result = $cn->query($sql);
+                                                            $banners = $result->fetchAll(PDO::FETCH_OBJ);
+                                                            foreach ($banners as $banner) {
+                                                                echo "<div class='col-md-6'>";
+                                                                    echo "<div class='card'>";
+                                                                        echo "<div class='card-header'>";
+                                                                            echo "<h4 class='card-title'>".$banner->Title."</h4>";
+                                                                        echo "</div>";
+                                                                        echo "<div class='card-body'>";
+                                                                            echo $banner->Description;
+                                                                        echo "</div>";
+                                                                        echo "<div class='card-body'>";
+                                                                        echo "Salario Base = ".$banner->Salary;
+                                                                    echo "</div>";
+                                                                        echo "<button class='btn btn-primary btn-round'>Round</button>";
+                                                                    echo "</div>";
+                                                                echo "</div>";
+                                                            }
+                                                            ?>
+                                                            <!-- <div class="col-md-6">
                                                                 <div class="card">
                                                                     <div class="card-header">
                                                                         <h4 class="card-title">Anuncio 1</h4>
@@ -155,50 +176,12 @@ if (!isset($_SESSION['NombreUsuario'])) {
                                                                     </div>
                                                                     <button class="btn btn-primary btn-round">Round</button>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
 
-                                                            <div class="col-md-6">
-                                                                <div class="card">
-                                                                    <div class="card-header card-header-danger">
-                                                                        <h4 class="card-title">Anuncio 2</h4>
-                                                                        <p class="category">Category subtitle</p>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                                                    </div>
-                                                                    <button class="btn btn-primary btn-round">Round</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="card">
-                                                                    <div class="card-header card-header-danger">
-                                                                        <h4 class="card-title">Anuncio 3</h4>
-                                                                        <p class="category">Category subtitle</p>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <h4 class="card-title">Descripción</h4>
-                                                                        The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                                                    </div>
-                                                                    <button class="btn btn-primary btn-round">Round</button>
-                                                                </div>
-                                                            </div>
 
-                                                            <div class="col-md-6">
-                                                                <div class="card">
-                                                                    <div class="card-header card-header-text card-header-primary">
-                                                                        <div class="card-text">
-                                                                            <h4 class="card-title">Anuncio 4</h4>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                                                    </div>
-                                                                    <button class="btn btn-primary btn-round">Round</button>
-                                                                </div>
-                                                            </div>
+
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
