@@ -63,7 +63,7 @@ if (!isset($_SESSION['NombreUsuario'])) {
             <div class="dropdown-menu dropdown-menu-right">
               <h6 class="dropdown-header">Perfil</h6>
               <a href="javascript:;" class="dropdown-item">Datos</a>
-              <a href="javascript:;" class="dropdown-item">Cerrar Sesión</a>
+              <a href="assets/Databases/logout.php" class="dropdown-item">Cerrar Sesión</a>
             </div>
           </li>
         </ul>
@@ -71,7 +71,7 @@ if (!isset($_SESSION['NombreUsuario'])) {
 
     </div>
   </nav>
-  <div class="page-header header-filter clear-filter purple-filter" data-parallax="true" style="background-image: url('assets/img/bg2.jpg')">
+  <div class="page-header header-filter clear-filter purple-filter" data-parallax="true" style="background-image: url('assets/Databases/img/teziutlan.jpg')">
     <div class="container">
       <div class="row">
         <div class="col-md-8 ml-auto mr-auto">
