@@ -1,16 +1,16 @@
 <?php
 session_start();
 if (!isset($_SESSION['NombreUsuario'])) {
-    header("location: login.php?Error=401");
-    //este cambio no es valido
-} 
+  header("location: login.php?Error=401");
   //este cambio no es valido
-  else {
-    include "assets/Databases/conection.php";
-    $IdUsers = $_SESSION['IdUsuario'];
-    $sql = "select * from Users where idUsers=" . $IdUsers;
-    $result = $cn->query($sql);
-    $userImage = $result->fetch(PDO::FETCH_OBJ);
+}
+//este cambio no es valido
+else {
+  include "assets/Databases/conection.php";
+  $IdUsers = $_SESSION['IdUsuario'];
+  $sql = "select * from Users where idUsers=" . $IdUsers;
+  $result = $cn->query($sql);
+  $userImage = $result->fetch(PDO::FETCH_OBJ);
 }
 
 ?>
@@ -120,30 +120,33 @@ if (!isset($_SESSION['NombreUsuario'])) {
                         <div class="tab-pane active" id="dashboard-2">
                           <div class="row">
 
-                          <?php
-                          include "assets/Databases/conection.php";
-                          $sql = "select * from Banner";
-                          $resultado=$cn->query($sql);
-                          $banner=$resultado->fetchAll(PDO::FETCH_OBJ);
-                          foreach($banner as $banner){
-                            echo '<div class="col-md-6">';
-                            echo ' <div class="card">';
-                            echo ' <div class="card-header">';
-                            echo "   <h4 class='card-title'>".$banner->Title."</h4>";
-                            echo "<p class='category'>Salario: .".$banner->Salary."</p>";
-                            echo '</div>';
-                            echo ' <div class="card-body">';
-                            echo "$banner->Description";
-                            echo '  </div>';
-                            echo ' <button class="btn btn-primary btn-round">Round</button>';
-                            echo '</div>';
-                            echo '</div>';
-                          }
-                           ?>
+                            <?php
+                            include "assets/Databases/conection.php";
+                            $sql = "select * from Banner";
+                            $resultado = $cn->query($sql);
+                            $banner = $resultado->fetchAll(PDO::FETCH_OBJ);
+                            foreach ($banner as $banner) {
+                              echo '<div class="col-md-6">';
+                              echo ' <div class="card">';
+                              echo ' <div class="card-header">';
+                              echo "   <h4 class='card-title'>" . $banner->Title . "</h4>";
+                              echo "<p class='category'>Salario: ." . $banner->Salary . "</p>";
+                              echo '</div>';
+                              echo ' <div class="card-body">';
+                              echo "$banner->Description";
+                              echo '  </div>';
+                              echo ' <button class="btn btn-primary btn-round">Round</button>';
+                              echo '</div>';
+                              echo '</div>';
+                            }
+                            ?>
 
-                           
+
                           </div>
                         </div>
+                        <div class="tab-pane" id="schedule-2">
+                          <div class="tab-pane active" id="dashboard-2">
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -151,11 +154,12 @@ if (!isset($_SESSION['NombreUsuario'])) {
                 </div>
               </div>
             </div>
-            <!--                 end nav pills -->
           </div>
+          <!--                 end nav pills -->
         </div>
       </div>
     </div>
+  </div>
   </div>
 
 
