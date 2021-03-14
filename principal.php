@@ -3,9 +3,7 @@ session_start();
 if (!isset($_SESSION['NombreUsuario'])) {
     header("location: login.php?Error=401");
     //este cambio no es valido
-} else if($_SESSION['rol'] != 1){
-      header("location: login.php");
-  }
+} 
   //este cambio no es valido
   else {
     include "assets/Databases/conection.php";
