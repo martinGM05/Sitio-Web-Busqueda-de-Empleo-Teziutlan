@@ -1,16 +1,16 @@
 <?php
 session_start();
 if (!isset($_SESSION['NombreUsuario'])) {
-    header("location: login.php?Error=401");
-    //este cambio no es valido
-} 
+  header("location: login.php?Error=401");
   //este cambio no es valido
-  else {
-    include "assets/Databases/conection.php";
-    $IdUsers = $_SESSION['IdUsuario'];
-    $sql = "select * from Users where idUsers=" . $IdUsers;
-    $result = $cn->query($sql);
-    $userImage = $result->fetch(PDO::FETCH_OBJ);
+}
+//este cambio no es valido
+else {
+  include "assets/Databases/conection.php";
+  $IdUsers = $_SESSION['IdUsuario'];
+  $sql = "select * from Users where idUsers=" . $IdUsers;
+  $result = $cn->query($sql);
+  $userImage = $result->fetch(PDO::FETCH_OBJ);
 }
 
 ?>
@@ -122,18 +122,20 @@ if (!isset($_SESSION['NombreUsuario'])) {
 
                           <?php
                           include "assets/Databases/conection.php";
-                          $sql = "SELECT b.Title, b.Description, b.Salary, e.idUsers, u.Name from Banner as b inner join Enterprise as e on b.idBanner=e.idBanner inner join Users as u where e.idUsers=u.idUsers";
+                          $sql = "SELECT b.Title, b.Description, b.Salary, e.idUsers, u.Name from Banner as b inner join Enterprise as e on b.idEnterprise=e.idEnterprise inner join Users as u on e.idUsers=u.idUsers";
                           $resultado=$cn->query($sql);
                           $banner=$resultado->fetchAll(PDO::FETCH_OBJ);
                           foreach($banner as $banner){
                             echo '<div class="col-md-6">';
                             echo ' <div class="card">';
                             echo ' <div class="card-header">';
-                            echo "   <h4 class='card-title'>".$banner->Title."</h4>";
-                            echo "<p class='category'>Salario: .".$banner->Salary."</p>";
+                            echo "<h4 class='card-title'>".$banner->Name."<h4>";
+                            echo "<h4><p class='category'>".$banner->Title."</p></h4>";
+                            echo "<p class='category'>".$banner->Description."</p>";
+                            
                             echo '</div>';
                             echo ' <div class="card-body">';
-                            echo "$banner->Description";
+                            echo "<p class='category'>Salario: ".$banner->Salary."</p>";
                             echo '  </div>';
                             echo ' <button class="btn btn-primary btn-round">Round</button>';
                             echo '</div>';
@@ -144,6 +146,9 @@ if (!isset($_SESSION['NombreUsuario'])) {
                            
                           </div>
                         </div>
+                        <div class="tab-pane" id="schedule-2">
+                          <div class="tab-pane active" id="dashboard-2">
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -154,9 +159,11 @@ if (!isset($_SESSION['NombreUsuario'])) {
 
             <!--                 end nav pills -->
           </div>
+          <!--                 end nav pills -->
         </div>
       </div>
     </div>
+  </div>
   </div>
 
 
