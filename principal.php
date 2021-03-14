@@ -122,7 +122,7 @@ if (!isset($_SESSION['NombreUsuario'])) {
 
                           <?php
                           include "assets/Databases/conection.php";
-                          $sql = "select * from Banner";
+                          $sql = "SELECT b.Title, b.Description, b.Salary, e.idUsers, u.Name from Banner as b inner join Enterprise as e on b.idBanner=e.idBanner inner join Users as u where e.idUsers=u.idUsers";
                           $resultado=$cn->query($sql);
                           $banner=$resultado->fetchAll(PDO::FETCH_OBJ);
                           foreach($banner as $banner){
@@ -151,6 +151,7 @@ if (!isset($_SESSION['NombreUsuario'])) {
                 </div>
               </div>
             </div>
+
             <!--                 end nav pills -->
           </div>
         </div>
