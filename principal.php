@@ -119,119 +119,29 @@ if (!isset($_SESSION['NombreUsuario'])) {
                       <div class="tab-content">
                         <div class="tab-pane active" id="dashboard-2">
                           <div class="row">
-                            <div class="col-md-6">
-                              <div class="card">
-                                <div class="card-header">
-                                  <h4 class="card-title">Anuncio 1</h4>
-                                  <p class="category">Category subtitle</p>
-                                </div>
-                                <div class="card-body">
-                                  The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                </div>
-                                <button class="btn btn-primary btn-round">Round</button>
-                              </div>
-                            </div>
 
-                            <div class="col-md-6">
-                              <div class="card">
-                                <div class="card-header card-header-danger">
-                                  <h4 class="card-title">Anuncio 2</h4>
-                                  <p class="category">Category subtitle</p>
-                                </div>
-                                <div class="card-body">
-                                  The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                </div>
-                                <button class="btn btn-primary btn-round">Round</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="card">
-                              <div class="card-header card-header-danger">
-                                  <h4 class="card-title">Anuncio 3</h4>
-                                  <p class="category">Category subtitle</p>
-                                </div>
-                                <div class="card-body">
-                                  <h4 class="card-title">Descripción</h4>
-                                  The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                </div>
-                                <button class="btn btn-primary btn-round">Round</button>
-                              </div>
-                            </div>
+                          <?php
+                          include "assets/Databases/conection.php";
+                          $sql = "select * from Banner";
+                          $resultado=$cn->query($sql);
+                          $banner=$resultado->fetchAll(PDO::FETCH_OBJ);
+                          foreach($banner as $banner){
+                            echo '<div class="col-md-6">';
+                            echo ' <div class="card">';
+                            echo ' <div class="card-header">';
+                            echo "   <h4 class='card-title'>".$banner->Title."</h4>";
+                            echo "<p class='category'>Salario: .".$banner->Salary."</p>";
+                            echo '</div>';
+                            echo ' <div class="card-body">';
+                            echo "$banner->Description";
+                            echo '  </div>';
+                            echo ' <button class="btn btn-primary btn-round">Round</button>';
+                            echo '</div>';
+                            echo '</div>';
+                          }
+                           ?>
 
-                            <div class="col-md-6">
-                              <div class="card">
-                                <div class="card-header card-header-text card-header-primary">
-                                  <div class="card-text">
-                                    <h4 class="card-title">Anuncio 4</h4>
-                                  </div>
-                                </div>
-                                <div class="card-body">
-                                  The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                </div>
-                                <button class="btn btn-primary btn-round">Round</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="tab-pane" id="schedule-2">
-                        <div class="tab-pane active" id="dashboard-2">
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="card">
-                                <div class="card-header">
-                                  <h4 class="card-title">Anuncio 1</h4>
-                                  <p class="category">Category subtitle</p>
-                                </div>
-                                <div class="card-body">
-                                  The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                </div>
-                                <button class="btn btn-primary btn-round">Round</button>
-                              </div>
-                            </div>
-
-                            <div class="col-md-6">
-                              <div class="card">
-                                <div class="card-header card-header-danger">
-                                  <h4 class="card-title">Anuncio 2</h4>
-                                  <p class="category">Category subtitle</p>
-                                </div>
-                                <div class="card-body">
-                                  The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                </div>
-                                <button class="btn btn-primary btn-round">Round</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="card">
-                              <div class="card-header card-header-danger">
-                                  <h4 class="card-title">Anuncio 3</h4>
-                                  <p class="category">Category subtitle</p>
-                                </div>
-                                <div class="card-body">
-                                  <h4 class="card-title">Descripción</h4>
-                                  The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                </div>
-                                <button class="btn btn-primary btn-round">Round</button>
-                              </div>
-                            </div>
-
-                            <div class="col-md-6">
-                              <div class="card">
-                                <div class="card-header card-header-text card-header-primary">
-                                  <div class="card-text">
-                                    <h4 class="card-title">Anuncio 4</h4>
-                                  </div>
-                                </div>
-                                <div class="card-body">
-                                  The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                                </div>
-                                <button class="btn btn-primary btn-round">Round</button>
-                              </div>
-                            </div>
+                           
                           </div>
                         </div>
                         </div>
