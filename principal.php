@@ -2,7 +2,12 @@
 session_start();
 if (!isset($_SESSION['NombreUsuario'])) {
     header("location: login.php?Error=401");
-} else {
+    //este cambio no es valido
+} else if($_SESSION['rol'] != 1){
+      header("location: login.php");
+  }
+  //este cambio no es valido
+  else {
     include "assets/Databases/conection.php";
     $IdUsers = $_SESSION['IdUsuario'];
     $sql = "select * from Users where idUsers=" . $IdUsers;

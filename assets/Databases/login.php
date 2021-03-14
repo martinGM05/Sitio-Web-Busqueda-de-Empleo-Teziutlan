@@ -11,6 +11,7 @@ $login = $sentencia->fetch(PDO::FETCH_OBJ);
 if($login){
     $_SESSION['NombreUsuario'] = $login->Name;
     $_SESSION['IdUsuario'] = $login->idUsers;
+    $_SESSION['rol']=$login->idUsers;
     
     
     
