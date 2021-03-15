@@ -1,5 +1,6 @@
 <?php
 session_start();
+$idUsuario=$_SESSION['IdUsuario'];
 if (!isset($_SESSION['NombreUsuario'])) {
   header("location: login.php?Error=401");
   //este cambio no es valido
@@ -102,13 +103,13 @@ else {
                     <div class="col-md-3">
                       <ul class="nav nav-pills nav-pills-icons flex-column" role="tablist">
                         <li class="nav-item">
-                          <a class="nav-link active" href="#dashboard-2" role="tab" data-toggle="tab">
+                          <a class="nav-link active" href="#dashboard-1" role="tab" data-toggle="tab">
                             <i class="material-icons">dashboard</i>
                             Vacantes
                           </a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#schedule-2" role="tab" data-toggle="tab">
+                          <a class="nav-link" href="#schedule-3" role="tab" data-toggle="tab">
                             <i class="material-icons">schedule</i>
                             Favoritos
                           </a>
@@ -117,12 +118,12 @@ else {
                     </div>
                     <div class="col-md-8">
                       <div class="tab-content">
-                        <div class="tab-pane active" id="dashboard-2">
+                        <div class="tab-pane active" id="dashboard-1">
                           <div class="row">
 
                           <?php
                           include "assets/Databases/conection.php";
-                          $sql = "SELECT b.Title, b.Description, b.Salary, e.idUsers, u.Name from Banner as b inner join Enterprise as e on b.idEnterprise=e.idEnterprise inner join Users as u on e.idUsers=u.idUsers";
+                          $sql = "SELECT b.idBanner, b.Title, b.Description, b.Salary, e.idUsers, u.Name from Banner as b inner join Enterprise as e on b.idEnterprise=e.idEnterprise inner join Users as u on e.idUsers=u.idUsers";
                           $resultado=$cn->query($sql);
                           $banner=$resultado->fetchAll(PDO::FETCH_OBJ);
                           foreach($banner as $banner){
@@ -137,7 +138,7 @@ else {
                             echo ' <div class="card-body">';
                             echo "<p class='category'>Salario: ".$banner->Salary."</p>";
                             echo '  </div>';
-                            echo ' <button class="btn btn-primary btn-round">Round</button>';
+                           echo "<a href='assets/Databases/agregarfavorito.php?Idbanner=".$banner->idBanner."' class='btn btn-primary btn-round' id='btnEditar'>Agregar a Favoritos </a>";
                             echo '</div>';
                             echo '</div>';
                           }
@@ -146,9 +147,38 @@ else {
                            
                           </div>
                         </div>
-                        <div class="tab-pane" id="schedule-2">
+                        <div class="tab-pane" id="schedule-3">
                           <div class="tab-pane active" id="dashboard-2">
+                          <div class="row">
+
+                          <?php
+                          include "assets/Databases/conection.php";
+                          $sql = "SELECT b.Title, b.Description, b.Salary, e.idUsers, u.Name from Banner as b inner join Enterprise as e on b.idEnterprise=e.idEnterprise inner join Users as u on e.idUsers=u.idUsers inner join Favorites as f where f.idUsers='".$idUsuario."' and b.idBanner=f.idBanner";
+                          $resultado=$cn->query($sql);
+                          $banner=$resultado->fetchAll(PDO::FETCH_OBJ);
+                          foreach($banner as $banner){
+                            echo '<div class="col-md-6">';
+                            echo ' <div class="card">';
+                            echo ' <div class="card-header">';
+                            echo "<h4 class='card-title'>".$banner->Name."<h4>";
+                            echo "<h4><p class='category'>".$banner->Title."</p></h4>";
+                            echo "<p class='category'>".$banner->Description."</p>";
+                            
+                            echo '</div>';
+                            echo ' <div class="card-body">';
+                            echo "<p class='category'>Salario: ".$banner->Salary."</p>";
+                            echo '  </div>';
+                           echo "<a href='login.php?IdUser=".$banner->idUsers."' class='btn btn-primary btn-round' id='btnEditar'>Agregar a Favoritos </a>";
+                            echo '</div>';
+                            echo '</div>';
+                          }
+                           ?>
+
+                           
                           </div>
+
+                          </div>
+                          
                         </div>
                       </div>
                     </div>
