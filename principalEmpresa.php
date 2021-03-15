@@ -145,7 +145,7 @@ if (!isset($_SESSION['NombreUsuario'])) {
                                                     <div class="tab-pane active" id="dashboard-2">
                                                         <div class="row">
                                                             <?php
-                                                            $sql = "select b.Title, b.Description, b.Salary from Users as u inner join Enterprise as e on u.idUsers = e.idUsers inner join Banner as b where u.idUsers =".$_SESSION['IdUsuario'];
+                                                            $sql = "select b.Title, b.Description, b.Salary from Banner as b inner join Enterprise as e on b.idEnterprise = e.idEnterprise where b.idEnterprise =".$_SESSION['IdUsuario'];
                                                             $result = $cn->query($sql);
                                                             $banners = $result->fetchAll(PDO::FETCH_OBJ);
                                                             foreach ($banners as $banner) {
